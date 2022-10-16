@@ -3,49 +3,99 @@
 {% block title %}Home{% endblock %}
 
 {% block content %}
-  <div class="wrapper">
-    <div class="section section-hero section-shaped">
-      <div class="shape shape-style-1 shape-primary">
-        <span class="span-150"></span>
-        <span class="span-50"></span>
-        <span class="span-50"></span>
-        <span class="span-75"></span>
-        <span class="span-100"></span>
-        <span class="span-75"></span>
-        <span class="span-50"></span>
-        <span class="span-100"></span>
-        <span class="span-50"></span>
-        <span class="span-100"></span>
-      </div>
-      <div class="page-header">
-        <div class="container shape-container d-flex align-items-center py-lg">
-          <div class="col px-0">
-            <div class="row align-items-center justify-content-center">
-              <div class="col-lg-6 text-center">
-                <img src="../static/img/tinder-logo-white-sm.png" style="width: 200px;" class="img-fluid">
-                <p class="lead text-white">Download <a href="https://tinder.com" target="_blank">Tinder</a> profile photos. 100% Free, no email asked.</p>
-                <div class="btn-wrapper mt-5">
-                  <a href="https://www.creative-tim.com/product/argon-design-system" class="btn btn-lg btn-white btn-icon mb-3 mb-sm-0">
-                    <span class="btn-inner--icon"><i class="fa-regular fa-images"></i></span>
-                    <span class="btn-inner--text">Get photos</span>
-                  </a>
+
+<div class="wrapper">
+  <div class="section section-hero section-shaped pt-0">
+    <div class="shape shape-style-1 shape-primary">
+      <span class="span-150"></span>
+      <span class="span-50"></span>
+      <span class="span-50"></span>
+      <span class="span-75"></span>
+      <span class="span-100"></span>
+      <span class="span-75"></span>
+      <span class="span-50"></span>
+      <span class="span-100"></span>
+      <span class="span-50"></span>
+      <span class="span-100"></span>
+    </div>
+    <div class="page-header text-white">
+      <div class="container shape-container d-flex align-items-center py-lg">
+        <div class="col px-0">
+          <div class="row align-items-center justify-content-center">
+            <div class="col-lg-7">
+              <h1 id="site-logo" class="text-center mb-5">
+                <img src="../static/img/tinder-logo-white-sm.png" alt="{{ sitename }}" class="img-fluid">
+                <div class="ps-4">photos downloader</div>
+              </h1>
+              <p class="lead text-center text-white mt-0 mb-4">Download <a href="https://tinder.com" target="_blank">Tinder</a> profile photos for free. No email required.</p>
+              <!-- Alerts -->
+              {% if get_flashed_messages() %}
+                <div class="alert alert-primary alert-dismissible fade show pr-5" role="alert">
+                  {{ get_flashed_messages() | join(" ") }}
+                  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
                 </div>
-                <div class="mt-5">
-                  <small class="font-weight-bold mb-0 mr-2 text-white">Proudly coded by
-                    <a href="{{ author.url }}" target="_blank">{{ author.name }}</a>
-                  </small>
+              {% endif %}
+              <form method="post" id="scrapping-form">
+                <div class="row mb-3">
+                  <div class="col col-sm-12 col-md-6">
+                      <label for="user_id" class="form-label">Tinder user ID</label>
+                      <input type="text" id="user_id" name="user_id" class="form-control" placeholder={{ random_user_id }} value="{{ data.user_id }}">
+                  </div>
+                  <div class="col col-sm-12 col-md-6">
+                      <label for="photos_dimensions" class="form-label">Photos dimensions</label>
+                      <select id="photos_dimensions" name="photos_dimensions" class="form-control">
+                      {% for dimension in photos_dimensions %}
+                          <option value="{{ dimension }}"{% if dimension == data.photos_dimensions or (not data.photos_dimensions and dimension == photos_default_dimension) %} selected{% endif %}>{{ dimension|capitalize }}</option>
+                      {% endfor %}
+                      </select>
+                  </div>
                 </div>
+                <div class="mb-3 form-check">
+                    <input type="checkbox" id="consent" name="consent" class="form-check-input"{% if data.consent == "on" %} checked{% endif %}>
+                    <label class="small form-check-label" for="consent"><b>I consent</b> that this service will be used only in a manner that respects the privacy of Tinder users. This app and its owner will not be held responsible for any abuse.</label>
+                </div>
+                <button id="formBtn" type="submit" class="btn btn-lg btn-white btn-icon mb-3 mb-sm-0">
+                  <span class="btn-inner--icon"><i class="fa-regular fa-images"></i></span>
+                  <span class="btn-inner--text">Get photos</span>
+                </button>
+                <div id="loadingSpinner" class="container my-0"></div>
+              </form>
+              <div class="text-center mt-4">
+                <small class="font-weight-bold mb-0 mr-2 text-white">Coded with <i class="fa-solid fa-heart"></i> by <a href="{{ author.url }}" target="_blank">{{ author.name }}</a></small>
               </div>
             </div>
           </div>
         </div>
       </div>
-      <div class="separator separator-bottom separator-skew zindex-100">
-        <svg x="0" y="0" viewBox="0 0 2560 100" preserveAspectRatio="none" version="1.1" xmlns="http://www.w3.org/2000/svg">
-          <polygon class="fill-gray" points="2560 0 2560 100 0 100"></polygon>
-        </svg>
-      </div>
+    </div>
+    <div class="separator separator-bottom separator-skew zindex-100">
+      <svg x="0" y="0" viewBox="0 0 2560 100" preserveAspectRatio="none" version="1.1" xmlns="http://www.w3.org/2000/svg">
+        <polygon class="fill-gray" points="2560 0 2560 100 0 100"></polygon>
+      </svg>
     </div>
   </div>
+</div>
+
+<div id="loadingBar" class="container my-0"></div>
+
+{% if photos_paths and photos_paths|length %}
+  <div id="scrapping-result" class="container mt-0 pt-0" style="margin-top:-400px">
+      <div class="row">
+      {% for path in photos_paths %}
+          <div class="col col-md-4 col-sm-6 col-xs-12">
+              <div class="card shadow my-3">
+                  <img src="{{ path }}" class="card-img-top" alt="Tinder photo #{{ loop.index }} of {{ data.user_id }}'s profile">
+                  <div class="card-body text-center">
+                      <a href="{{ path }}" target="_blank" class="btn btn-outline-primary"><i class="fa-regular fa-eye"></i></a>
+                      <a href="{{ path }}" download class="btn btn-primary"><i class="fa-solid fa-download"></i></a>
+                  </div>
+              </div>
+          </div>
+      {% endfor %}
+      </div>
+  </div>
+{% endif %}
 
 {% endblock %}

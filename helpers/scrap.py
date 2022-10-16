@@ -6,6 +6,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.firefox.options import Options
 import re
 import requests
+import collections
 import codecs
 import config as c
 
@@ -19,6 +20,7 @@ def get_photos_urls(userId, photos_dimensions):
     options.headless = True
     # Use Selenium to enable JS support while scrapping
     driver = webdriver.Firefox(options=options)
+    driver.set_page_load_timeout(99);
     # Open url with Selenium
     try:
         driver.get(c.TINDER_PROFILE_BASE_URL + userId)
@@ -32,7 +34,7 @@ def get_photos_urls(userId, photos_dimensions):
         html = driver.page_source
         soup = BeautifulSoup(html, 'html.parser')
     except Exception as e:
-        return error_msg(exception=e)
+        return {"alert": alert(exception=e)}
     
     # Writing page source code to a HTML file (for debug)
     with open("data/bf4/profile.htm", "w") as file:
@@ -44,40 +46,58 @@ def get_photos_urls(userId, photos_dimensions):
         script_str = script.get_text()
         if 'window.__data' in script_str:
             data_scripts.append(script_str)
-
     if len(data_scripts) < 1:
-            return error_msg()
+            return {"alert": alert()}
     else:
         for script_str in data_scripts:
-            matches = re.findall('"url":"(.+?)"', script_str)
-            if(len(matches) < 1):
-                return error_msg(ref='user_id')
+            urls = re.findall('"url":"(.+?)"', script_str)
+            if(len(urls) < 1):
+                return {"alert": alert(ref='user_id')}
             else:
-                for url in matches:
+                for url in urls:
                     if (photos_dimensions + '_') in url:
-                        url = codecs.decode(url, 'unicode-escape')
-                        photos_urls.append(url)
+                        photos_urls.append(codecs.decode(url, 'unicode-escape'))
+
+    if len(photos_urls) < 1:
+        return {
+            "alert": alert(ref="format"),
+            "photos": get_largest_photos(urls)
+        }
     return {
-        "result": "success",
         "photos": photos_urls
     }
 
 
-def error_msg(ref = None, exception = None):
-    msg = None
-    msg_default = f"An error occured. Please contact <a href='mailto:{c.AUTHOR_EMAIL}'>webmaster</a>"
+def get_largest_photos(urls):
+    # Get highest width
+    widths = []
+    for url in urls:
+        width = re.search('(.+?)x', url.split("\\u002F")[-1])
+        if width:
+            width = int(width.group(1))
+        if width and not width in widths:
+            widths.append(width)
+    highest = max(widths)
+    # Get url for the highes
+    widths = []
+    selection = []
+    for url in urls:
+        if str(highest) in url:
+            selection.append(codecs.decode(url, 'unicode-escape'))
+    return selection
+
+
+def alert(ref = None, exception = None):
+    alert_default = f"An error occured. Please contact <a href='mailto:{c.AUTHOR_EMAIL}'>webmaster</a>"
     if exception:
         dir(exception)
         if exception.msg:
-            msg = f"{msg_default} with the following message: <i>{requests.utils.unquote(exception.msg)}</i>"
+            return f"{alert_default} with the following message: <i>{requests.utils.unquote(exception.msg)}</i>"
         else:
-            msg = msg = msg_default + '.'
+            return alert_default + '.'
     elif ref == "user_id":
-        msg = "The person you're looking for was not found. Please verify that you entered a correct user ID."
+        return "The person you're looking for was not found. Please verify that you entered a correct user ID."
+    elif ref == "format":
+        return "No photos with the requested dimensions. We retreived the largest ones."
     else:
-        msg = msg_default + '.'
-    
-    return {
-        "result": "error",
-        "msg": msg
-    }
+        return alert_default + '.'

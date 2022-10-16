@@ -4,6 +4,25 @@ body {
     background-color: #f4f5f7;
 }
 
+h1#site-logo {
+  text-transform: none;
+  font-size: 1.6rem;
+  color: #fff;
+  font-weight: 800;
+}
+h1#site-logo img {
+  width: 200px;
+}
+
+#navbar-main {
+  position: absolute !important;
+  width: 100%;
+}
+
+input, select, textarea{
+  color: #000;
+}
+
 #loadingBar lottie-player {
     margin: auto;
 }
@@ -12,7 +31,27 @@ body {
   fill: #f4f5f7;
 }
 
-.text-white a {
+.text-white a:not(.btn-white) {
   color: #fff;
   border-bottom: solid 1px #fff
+}
+
+form#scrapping-form {
+  background-color: #ffffff1c;
+  padding: 20px;
+  border-radius: 0.3rem;
+}
+
+label.form-label {
+  font-weight: 900;
+}
+
+#scrapping-result {
+  margin-top: -6.8rem !important;
+  position: relative;
+  z-index: 99;
+}
+
+.card {
+  border: none !important;
 }

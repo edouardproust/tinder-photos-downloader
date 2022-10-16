@@ -2,9 +2,9 @@ import os
 from dotenv import load_dotenv
 from flask import Flask, render_template, redirect, flash, url_for, Markup, request
 import config as c
-import scrapper
-import downloader
+from helpers import scrap, download, string
 import datetime
+import random
 
 load_dotenv()
 
@@ -45,25 +45,33 @@ def index():
 
     # POST request
     if request.method == "POST":
+        isValidForm = True
         for key in ["user_id", "photos_dimensions", "consent"]:
-            data[key] = request.form.get(key)
-        scrapping = scrapper.get_photos_urls(data["user_id"], data["photos_dimensions"])
-        if scrapping["result"] == "error":
-            # Display error message
-            flash(Markup(scrapping["msg"]))
-        else:
-            # Save photos on saver temporarly
-            photos_urls = scrapping["photos"]
-            downloader.save_all(photos_urls)
-            # Get relative path for response
-            photos_paths = downloader.get_relative_paths(photos_urls)
+            value = request.form.get(key)
+            if not value:
+                isValidForm = False
+                flash(Markup(f'Field <i>{string.slug_to_str(key)}</i> is mandatory.'))
+            else:
+                data[key] = value
+        if isValidForm:
+            scrapping = scrap.get_photos_urls(data["user_id"], data["photos_dimensions"])
+            if 'alert' in scrapping:
+                # Display alert 
+                flash(Markup(scrapping["alert"]))
+            if 'photos' in scrapping:
+                # Save photos on saver temporarly
+                photos_urls = scrapping["photos"]
+                download.save_all(photos_urls)
+                # Get relative path for response
+                photos_paths = download.get_relative_paths(photos_urls)
 
     # Get request
     return render_template("index.html", 
         photos_dimensions=c.PHOTOS_DIMENSIONS,
         photos_default_dimension=c.PHOTOS_DEFAULT_DIMENSION,
         data=data,
-        photos_paths=photos_paths
+        photos_paths=photos_paths,
+        random_user_id = random.choice(c.USER_ID_EXAMPLES)
     )
 
 if __name__ == '__main__':

@@ -15,37 +15,30 @@
         <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" rel="stylesheet">
     </head>
     <body id="page-top">
-    
-        <!-- Navbar -->
-        <nav id="navbar-main" class="navbar navbar-main navbar-expand-lg bg-white navbar-light position-sticky top-0 shadow py-2">
-            <div class="container">
-                <a class="navbar-brand mr-lg-5" href="./index.html">
-                    <img src="../static/img/blue.png">
-                </a>
-            </div>
-        </nav>
 
         {% block main %}{% endblock %}
         
         <!-- Footer-->
         <footer class="footer">
             <div class="container">
-                <hr>
+                {% if photos_paths and photos_paths|length %}
+                    <hr>
+                {% endif %}
                 <div class="d-flex align-items-center justify-content-between">
                     <div class="copyright">
                         &copy; {{ today.strftime('%Y') }} <a href="{{ author.url }}" target="_blank">{{ author.name }}</a>.
                     </div>
                     <div class="col col-lg-6 d-flex justify-content-end">
-                        <a target="_blank" href="{{ author.social.linkedin }}" rel="nofollow" class="btn btn-icon-only btn-linkedin rounded-circle" data-toggle="tooltip" data-original-title="LinkedIn">
+                        <a target="_blank" href="{{ author.social.linkedin }}" rel="nofollow" class="btn btn-icon-only rounded-circle" data-toggle="tooltip" data-original-title="LinkedIn">
                             <span class="btn-inner--icon"><i class="fa-brands fa-linkedin"></i></span>
                         </a>
-                        <a target="_blank" href="{{ author.social.github }}" rel="nofollow" class="btn btn-icon-only btn-github rounded-circle" data-toggle="tooltip" data-original-title="Github">
+                        <a target="_blank" href="{{ author.social.github }}" rel="nofollow" class="btn btn-icon-only rounded-circle" data-toggle="tooltip" data-original-title="Github">
                             <span class="btn-inner--icon"><i class="fa-brands fa-github"></i></span>
                         </a>
-                        <a target="_blank" href="{{ author.social.stackoverflow }}" rel="nofollow" class="btn btn-icon-only btn-stackoverflow rounded-circle" data-toggle="tooltip" data-original-title="StockOverflow">
+                        <a target="_blank" href="{{ author.social.stackoverflow }}" rel="nofollow" class="btn btn-icon-only rounded-circle" data-toggle="tooltip" data-original-title="StockOverflow">
                             <span class="btn-inner--icon"><i class="fa-brands fa-stack-overflow"></i></span>
                         </a>
-                        <a href="mailto:{{ author.email }}" rel="nofollow" class="btn btn-icon-only btn-email rounded-circle" data-toggle="tooltip" data-original-title="Email">
+                        <a href="mailto:{{ author.email }}" rel="nofollow" class="btn btn-icon-only rounded-circle" data-toggle="tooltip" data-original-title="Email">
                             <span class="btn-inner--icon"><i class="fa-solid fa-envelope"></i></span>
                         </a>
                     </div>

@@ -20,6 +20,7 @@ Coded by www.creative-tim.com
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
  */
  :root {
+    --social-icon-color: #6448b3;
     --blue: #5e72e4;
     --indigo: #5603ad;
     --purple: #8965e0;
@@ -16047,138 +16048,6 @@ Coded by www.creative-tim.com
     overflow: hidden;
   }
   
-  .section-nucleo-icons .icons-container {
-    position: relative;
-    max-width: 100%;
-    height: 360px;
-    margin: 0 auto;
-    z-index: 1;
-  }
-  
-  .section-nucleo-icons {
-    --icon-size: 5rem;
-    --icon-sm-size: 3.75rem;
-    --gutter: 7rem;
-  }
-  
-  .section-nucleo-icons .icons-container i {
-    position: absolute;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 50%;
-    background: #fff;
-    z-index: 1;
-    transform: translate(-50%, -50%);
-    box-shadow: 0 15px 35px rgba(50, 50, 93, 0.1), 0 5px 15px rgba(0, 0, 0, 0.07);
-    transition: all 0.2s cubic-bezier(0.25, 0.65, 0.9, 0.75);
-  }
-  
-  .section-nucleo-icons .icons-container i.icon {
-    width: var(--icon-size);
-    height: var(--icon-size);
-    font-size: 1.7em;
-  }
-  
-  .section-nucleo-icons .icons-container i.icon-sm {
-    width: var(--icon-sm-size);
-    height: var(--icon-sm-size);
-    font-size: 1.5em;
-  }
-  
-  .section-nucleo-icons .icons-container i:nth-child(1) {
-    font-size: 42px;
-    color: #fb6340;
-    z-index: 2;
-  }
-  
-  .section-nucleo-icons .icons-container:not(.on-screen) i {
-    transform: translate(-50%, -50%);
-    left: 50%;
-    top: 50%;
-  }
-  
-  .section-nucleo-icons .icons-container:not(.on-screen) i:not(:nth-child(1)) {
-    opacity: 0;
-  }
-  
-  .section-nucleo-icons .icons-container.on-screen i {
-    opacity: 1;
-  }
-  
-  .section-nucleo-icons .icons-container.on-screen i:nth-child(1) {
-    left: 50%;
-    top: 50%;
-    font-size: 42px;
-    color: #fb6340;
-  }
-  
-  .section-nucleo-icons .icons-container.on-screen i:nth-child(2) {
-    left: calc(50% + (var(--gutter) * 1.7));
-    top: 50%;
-  }
-  
-  .section-nucleo-icons .icons-container.on-screen i:nth-child(3) {
-    left: calc(50% + var(--gutter));
-    top: calc(50% + var(--gutter));
-  }
-  
-  .section-nucleo-icons .icons-container.on-screen i:nth-child(4) {
-    left: calc(50% + var(--gutter));
-    top: calc(50% - var(--gutter));
-  }
-  
-  .section-nucleo-icons .icons-container.on-screen i:nth-child(5) {
-    left: calc(50% + (var(--gutter) * 3));
-    top: 50%;
-  }
-  
-  .section-nucleo-icons .icons-container.on-screen i:nth-child(6) {
-    left: calc(50% + (var(--gutter) * 2.7));
-    top: calc(50% + (var(--gutter) * 1.5));
-  }
-  
-  .section-nucleo-icons .icons-container.on-screen i:nth-child(7) {
-    left: calc(50% + (var(--gutter) * 2.7));
-    top: calc(50% - (var(--gutter) * 1.5));
-  }
-  
-  .section-nucleo-icons .icons-container.on-screen i:nth-child(8) {
-    left: calc(50% - (var(--gutter) * 1.7));
-    top: 50%;
-  }
-  
-  .section-nucleo-icons .icons-container.on-screen i:nth-child(9) {
-    left: calc(50% - var(--gutter));
-    top: calc(50% + var(--gutter));
-  }
-  
-  .section-nucleo-icons .icons-container.on-screen i:nth-child(10) {
-    left: calc(50% - var(--gutter));
-    top: calc(50% - var(--gutter));
-  }
-  
-  .section-nucleo-icons .icons-container.on-screen i:nth-child(11) {
-    left: calc(50% - (var(--gutter) * 4));
-    top: 50%;
-  }
-  
-  .section-nucleo-icons .icons-container.on-screen i:nth-child(12) {
-    left: calc(50% - (var(--gutter) * 2.7));
-    top: calc(50% + (var(--gutter) * 1.5));
-  }
-  
-  .section-nucleo-icons .icons-container.on-screen i:nth-child(13) {
-    left: calc(50% - (var(--gutter) * 2.7));
-    top: calc(50% - (var(--gutter) * 1.5));
-  }
-  
-  @media (max-width: 991.98px) {
-    .section-nucleo-icons {
-      overflow: hidden;
-    }
-  }
-  
   .blur--hover {
     position: relative;
   }
@@ -17955,8 +17824,16 @@ Coded by www.creative-tim.com
   .btn-icon-only {
     width: 2.375rem;
     height: 2.375rem;
-    padding: 0;
+    padding: 0;color: #fff;
+    background-color: var(--social-icon-color);
+    border-color: var(--social-icon-color);
     box-shadow: 0 4px 6px rgba(50, 50, 93, 0.11), 0 1px 3px rgba(0, 0, 0, 0.08);
+  }
+  
+  .btn-icon-only:hover {
+    color: #fff;
+    background-color: var(--social-icon-color);
+    border-color: var(--social-icon-color);
   }
   
   a.btn-icon-only {
@@ -17967,80 +17844,6 @@ Coded by www.creative-tim.com
   .btn-group-sm>.btn-icon-only.btn {
     width: 2rem;
     height: 2rem;
-  }
-  
-  .btn-github {
-    color: #fff;
-    background-color: #222222;
-    border-color: #222222;
-  }
-  
-  .btn-github:hover {
-    color: #fff;
-    background-color: #222222;
-    border-color: #222222;
-  }
-  
-  .btn-linkedin {
-    color: #fff;
-    background-color: #0274b3;
-    border-color: #0274b3;
-  }
-  
-  .btn-linkedin:hover {
-    color: #fff;
-    background-color: #0274b3;
-    border-color: #0274b3;
-  }
-  
-  .btn-stackoverflow {
-    color: #fff;
-    background-color: #f07b0f;
-    border-color: #f07b0f;
-  }
-  
-  .btn-stackoverflow:hover {
-    color: #fff;
-    background-color: #f07b0f;
-    border-color: #f07b0f;
-  }
-  
-  .btn-email {
-    color: #fff;
-    background-color: #cc2127;
-    border-color: #cc2127;
-  }
-  
-  .btn-email:hover {
-    color: #fff;
-    background-color: #222222;
-    border-color: #222222;
-  }
-  
-  .btn-email:focus,
-  .btn-email.focus {
-    box-shadow: 0 4px 6px rgba(50, 50, 93, 0.11), 0 1px 3px rgba(0, 0, 0, 0.08), 0 0 0 0 rgba(34, 34, 34, 0.5);
-  }
-  
-  .btn-email.disabled,
-  .btn-email:disabled {
-    color: #fff;
-    background-color: #222222;
-    border-color: #222222;
-  }
-  
-  .btn-email:not(:disabled):not(.disabled):active,
-  .btn-email:not(:disabled):not(.disabled).active,
-  .show>.btn-email.dropdown-toggle {
-    color: #fff;
-    background-color: #090909;
-    border-color: #222222;
-  }
-  
-  .btn-email:not(:disabled):not(.disabled):active:focus,
-  .btn-email:not(:disabled):not(.disabled).active:focus,
-  .show>.btn-email.dropdown-toggle:focus {
-    box-shadow: none, 0 0 0 0 rgba(34, 34, 34, 0.5);
   }
   
   .card {
