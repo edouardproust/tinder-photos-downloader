@@ -1,0 +1,10 @@
+{% extends 'layouts/single.html' %}
+
+{% block title %}Page not found{% endblock %}
+
+{% block content %}
+
+    <div><b>Oops, looks like this page does not exit.</b></div>
+    <div><a href="{{ url_for('index') }}">Click here</a> to go to the Home Page.</div>
+
+{% endblock %}

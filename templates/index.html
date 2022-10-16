@@ -1,0 +1,54 @@
+{% extends 'layouts/no-title.html' %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+
+<!-- Alerts -->
+{% if get_flashed_messages() %}
+    <header>
+        <div class="alert alert-primary text-center" role="alert">
+            {{ get_flashed_messages() | join(" ") }}
+        </div>
+    </header>
+{% endif %}
+
+<form method="post">
+    <div class="mb-3">
+        <label for="user_id" class="form-label">User ID</label>
+        <input type="text" id="user_id" name="user_id" class="form-control" placeholder="johndoe" value="{{ data.user_id }}">
+    </div>
+    <div class="mb-3">
+        <label for="photos_dimensions" class="form-label">Photos dimensions</label>
+        <select id="photos_dimensions" name="photos_dimensions" class="form-select">
+        {% for dimension in photos_dimensions %}
+            <option value="{{ dimension }}"{% if dimension == data.photos_dimensions or (not data.photos_dimensions and dimension == photos_default_dimension) %} selected{% endif %}>{{ dimension|capitalize }}</option>
+        {% endfor %}
+        </select>
+    </div>
+    <div class="mb-3 form-check">
+        <input type="checkbox" id="consent" name="consent" class="form-check-input"{% if data.consent == "on" %} checked{% endif %}>
+        <label class="small form-check-label" for="consent">I agree that the use of this service shall be done solely with respect to my privacy. This site is only a tool for users and cannot be held responsible for any breach of privacy. Any infringement of the privacy of persons will be charged exclusively to the user.</label>
+    </div>
+    <button id="formBtn" type="submit" class="btn btn-primary">Get photos</button>
+</form>
+
+<div id="loadingBar"></div>
+
+{% if photos_paths and photos_paths|length %}
+    <div class="row g-3 mt-5">
+    {% for path in photos_paths %}
+        <div class="col col-lg-3 col-md-4 col-sm-6 col-xs-12">
+            <div class="card">
+                <img src="{{ path }}" class="card-img-top" alt="Tinder photo #{{ loop.index }} of {{ data.user_id }}'s profile">
+                <div class="card-body">
+                    <a href="{{ path }}" target="_blank" class="btn btn-outline-primary">View</a>
+                    <a href="{{ path }}" download class="btn btn-primary">Download</a>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+    </div>
+{% endif %}
+
+{% endblock content %}

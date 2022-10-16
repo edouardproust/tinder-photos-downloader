@@ -1,0 +1,17 @@
+[[source]]
+url = "https://pypi.python.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+selenium = "*"
+bs4 = "*"
+requests = "*"
+flask = "*"
+gunicorn = "*"
+python-dotenv = "*"
+
+[dev-packages]
+
+[requires]
+python_version = "3.8"

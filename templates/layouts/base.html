@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="Edoiard Proust" />
+        <title>{{ sitename }}: {% block title %}{% endblock %}</title>
+        <!--link rel="icon" type="image/x-icon" href="../static/img/favicon.png" /-->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.2/css/bootstrap.min.css" integrity="sha512-CpIKUSyh9QX2+zSdfGP+eWLx23C8Dj9/XmHjZY2uDtfkdLGo0uY12jgcnkX9vXOgYajEKb/jiw67EYm+kBf+6g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+        <link href="../static/css/custom.css" rel="stylesheet" />
+        <!-- scripts -->
+        <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+    </head>
+    <body id="page-top">
+    
+        <!-- Navigation-->
+        <div>Navigation</div>
+
+        {% block main %}{% endblock %}
+        
+        <!-- Footer-->
+        <div>Footer</div>
+        
+        <!-- Core theme JS-->
+        <script src="../static/js/scripts.js"></script>
+    </body>
+</html>

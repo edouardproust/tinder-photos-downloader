@@ -1,0 +1,23 @@
+{% extends 'layouts/base.html' %}
+
+{% block main %}
+
+        <!-- Title h1 -->
+        <section id="title">
+            <div class="container">
+                <h2 class="text-center">{{ self.title() }}</h2>
+            </div>
+        </section>
+
+        <!-- Content -->
+        <section id="content">
+            <div class="container px-5">
+
+                <!-- Content -->
+                {% block content %}{% endblock %}
+                
+            </div>
+
+        </section>
+
+{% endblock %}
