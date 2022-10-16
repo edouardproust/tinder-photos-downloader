@@ -6,7 +6,6 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.firefox.options import Options
 import re
 import requests
-import collections
 import codecs
 import config as c
 
@@ -35,10 +34,6 @@ def get_photos_urls(userId, photos_dimensions):
         soup = BeautifulSoup(html, 'html.parser')
     except Exception as e:
         return {"alert": alert(exception=e)}
-    
-    # Writing page source code to a HTML file (for debug)
-    with open("data/bf4/profile.htm", "w") as file:
-        file.write(soup.prettify())
 
     # Extract photos urls
     data_scripts = []
