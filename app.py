@@ -4,6 +4,7 @@ from flask import Flask, render_template, redirect, flash, url_for, Markup, requ
 import config as c
 import scrapper
 import downloader
+import datetime
 
 load_dotenv()
 
@@ -13,6 +14,13 @@ app.config["TEMPLATES_AUTO_RELOAD"] = True # Ensure templates are auto-reloaded
 
 # Templates variables & filters
 app.jinja_env.globals['sitename'] = c.SITE_NAME
+app.jinja_env.globals['today'] = datetime.date.today()
+app.jinja_env.globals['author'] = {
+    "name": c.AUTHOR_NAME,
+    "url": c.AUTHOR_URL,
+    "email": c.AUTHOR_EMAIL,
+    "social": { "github": c.AUTHOR_GITHUB, "linkedin": c.AUTHOR_LINKEDIN, "stackoverflow": c.AUTHOR_STACKOVERFLOW }
+}
 
 
 @app.after_request

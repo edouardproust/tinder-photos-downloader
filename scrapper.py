@@ -65,7 +65,7 @@ def get_photos_urls(userId, photos_dimensions):
 
 def error_msg(ref = None, exception = None):
     msg = None
-    msg_default = f"An error occured. Please contact <a href='mailto:{c.CONTACT_WEBMASTER}'>webmaster</a>"
+    msg_default = f"An error occured. Please contact <a href='mailto:{c.AUTHOR_EMAIL}'>webmaster</a>"
     if exception:
         dir(exception)
         if exception.msg:

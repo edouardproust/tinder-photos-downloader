@@ -1,1 +1,18 @@
 /* Silence is gold. */
+
+body {
+    background-color: #f4f5f7;
+}
+
+#loadingBar lottie-player {
+    margin: auto;
+}
+
+.fill-gray {
+  fill: #f4f5f7;
+}
+
+.text-white a {
+  color: #fff;
+  border-bottom: solid 1px #fff
+}

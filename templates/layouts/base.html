@@ -4,25 +4,61 @@
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
-        <meta name="author" content="Edoiard Proust" />
+        <meta name="author" content="Edouard Proust" />
         <title>{{ sitename }}: {% block title %}{% endblock %}</title>
         <!--link rel="icon" type="image/x-icon" href="../static/img/favicon.png" /-->
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.2/css/bootstrap.min.css" integrity="sha512-CpIKUSyh9QX2+zSdfGP+eWLx23C8Dj9/XmHjZY2uDtfkdLGo0uY12jgcnkX9vXOgYajEKb/jiw67EYm+kBf+6g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+        <!-- Styles -->
+        <link type="text/css" href="../static/css/argon-design-system.css" rel="stylesheet">
         <link href="../static/css/custom.css" rel="stylesheet" />
-        <!-- scripts -->
-        <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+        <!-- Fonts -->
+        <link href="https://fonts.googleapis.com/css?family=Poppins:200,300,400,600,700,800" rel="stylesheet">
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" rel="stylesheet">
     </head>
     <body id="page-top">
     
-        <!-- Navigation-->
-        <div>Navigation</div>
+        <!-- Navbar -->
+        <nav id="navbar-main" class="navbar navbar-main navbar-expand-lg bg-white navbar-light position-sticky top-0 shadow py-2">
+            <div class="container">
+                <a class="navbar-brand mr-lg-5" href="./index.html">
+                    <img src="../static/img/blue.png">
+                </a>
+            </div>
+        </nav>
 
         {% block main %}{% endblock %}
         
         <!-- Footer-->
-        <div>Footer</div>
+        <footer class="footer">
+            <div class="container">
+                <hr>
+                <div class="d-flex align-items-center justify-content-between">
+                    <div class="copyright">
+                        &copy; {{ today.strftime('%Y') }} <a href="{{ author.url }}" target="_blank">{{ author.name }}</a>.
+                    </div>
+                    <div class="col col-lg-6 d-flex justify-content-end">
+                        <a target="_blank" href="{{ author.social.linkedin }}" rel="nofollow" class="btn btn-icon-only btn-linkedin rounded-circle" data-toggle="tooltip" data-original-title="LinkedIn">
+                            <span class="btn-inner--icon"><i class="fa-brands fa-linkedin"></i></span>
+                        </a>
+                        <a target="_blank" href="{{ author.social.github }}" rel="nofollow" class="btn btn-icon-only btn-github rounded-circle" data-toggle="tooltip" data-original-title="Github">
+                            <span class="btn-inner--icon"><i class="fa-brands fa-github"></i></span>
+                        </a>
+                        <a target="_blank" href="{{ author.social.stackoverflow }}" rel="nofollow" class="btn btn-icon-only btn-stackoverflow rounded-circle" data-toggle="tooltip" data-original-title="StockOverflow">
+                            <span class="btn-inner--icon"><i class="fa-brands fa-stack-overflow"></i></span>
+                        </a>
+                        <a href="mailto:{{ author.email }}" rel="nofollow" class="btn btn-icon-only btn-email rounded-circle" data-toggle="tooltip" data-original-title="Email">
+                            <span class="btn-inner--icon"><i class="fa-solid fa-envelope"></i></span>
+                        </a>
+                    </div>
+                </div>
+                </div>
+        </footer>
         
-        <!-- Core theme JS-->
-        <script src="../static/js/scripts.js"></script>
+        <!-- Scripts -->
+        <script src="../static/js/jquery.min.js"></script>
+        <script src="../static/js/popper.min.js"></script>
+        <script src="../static/js/bootstrap.min.js"></script>
+        <script src="../static/js/argon-design-system.min.js"></script>
+        <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+        <script src="../static/js/custom.js"></script>
     </body>
 </html>
