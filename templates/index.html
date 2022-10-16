@@ -40,7 +40,12 @@
               <form method="post" id="scrapping-form">
                 <div class="row mb-3">
                   <div class="col col-sm-12 col-md-6">
-                      <label for="user_id" class="form-label">Tinder user ID</label>
+                      <label for="user_id" class="form-label">
+                        <span>Tinder username</span>
+                        <span data-toggle="tooltip" data-original-title='How to set a Username on Tinder:  1) Open Tinder.  2) Go to "Profile" (your top-left user photo).  3) Tap into "Settings" (cog icon).  4) Scroll down to "Web Profile". 5) Tap on "Username".  6) Type a username after the "@".  7) Tap on "Confirm".'>
+                          <i class="fa-solid fa-circle-info"></i>
+                        </span>
+                      </label>
                       <input type="text" id="user_id" name="user_id" class="form-control" placeholder={{ random_user_id }} value="{{ data.user_id }}">
                   </div>
                   <div class="col col-sm-12 col-md-6">

@@ -71,7 +71,7 @@ def index():
         photos_default_dimension=c.PHOTOS_DEFAULT_DIMENSION,
         data=data,
         photos_paths=photos_paths,
-        random_user_id = random.choice(c.USER_ID_EXAMPLES)
+        random_user_id=random.choice(c.USER_ID_EXAMPLES),
     )
 
 if __name__ == '__main__':

@@ -4,7 +4,11 @@
 
 **Technologies:** Python, Flask, scrapping (BeatifuSoup4 + Selenium), Bootstrap, Javascript, HTML, CSS
 
-![Screenshot](screenshot.png)
+![Screenshot](screenshot.jpg)
+
+## Upcoming updates
+
+- Increase speed ofthe app (optimise scrapping process and use Threads) in order to reduce Timeout exception and improve UX.
 
 ## Development
 
