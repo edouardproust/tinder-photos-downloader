@@ -36,9 +36,10 @@ gunicorn app:app
 heroku create <app_name>
 ```
 
-2. Add a Buildpack for Python
+2. Add a Buildpack for Heroku (replace `<app_name>` by your app name)
 ```bash
 heroku buildpacks:set heroku/python -a <app_name>
+heroku buildpacks:set https://github.com/mozilla/geckodriver.git -a <app_name>
 ```
 
 3. Push code to heroku using git
