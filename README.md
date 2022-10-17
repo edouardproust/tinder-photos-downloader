@@ -47,7 +47,7 @@ git init
 heroku git:remote -a <app_name>
 git add .
 git commit -m "First commit"
-git push -u heroku master # or: `git push heroku <branch_name>:master`
+git push -u heroku master # or if you are working on another branch: `git push heroku <branch_name>:master`
 ```
 
 4. Launch flask web app (dyno) on Heroku
@@ -63,5 +63,5 @@ heroku info -s | grep web_url | cut -d= -f2
 
 6. If the app is not working properly after you followd the previous steps: 
 - Check logs: `heroku logs --tail`
-- Run Heroku CLI: `heroku run bash` (close it with `exit`)
+- Run Heroku CLI (to list files etc.): `heroku run bash` (close it with `exit`)
 

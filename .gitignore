@@ -3,3 +3,4 @@ _archives
 static/downloads/*
 *.pyc
 *__pycache__
+geckodriver.log
