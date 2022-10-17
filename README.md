@@ -40,7 +40,7 @@ heroku create <app_name>
 ```bash
 heroku buildpacks:set heroku/python -a <app_name>
 heroku buildpacks:add https://github.com/mozilla/geckodriver.git
-```
+``` 
 
 3. Add the need varibles to the PATH in Heroku
 ```bash
