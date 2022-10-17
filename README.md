@@ -39,13 +39,12 @@ heroku create <app_name>
 2. Add a Buildpack for Heroku (replace `<app_name>` by your app name)
 ```bash
 heroku buildpacks:set heroku/python -a <app_name>
-heroku buildpacks:add https://github.com/evosystem-jp/heroku-buildpack-firefox
+heroku buildpacks:add https://github.com/pyronlaboratory/heroku-integrated-firefox-geckodriver
 ``` 
 
 3. Add the need varibles to the PATH in Heroku
 ```bash
-heroku config:set FIREFOX_BIN=/app/vendor/firefox/firefox
-heroku config:set GECKODRIVER_PATH = /app/vendor/geckodriver/geckodriver
+heroku config:set FIREFOX_BIN=/app/vendor/firefox/firefox GECKODRIVER_PATH=/app/vendor/geckodriver/geckodriver LD_LIBRARY_PATH=/usr/local/lib:/usr/lib:/lib:/app/vendor PATH=/usr/local/bin:/usr/bin:/bin:/app/vendor/
 ```
 
 3. Push code to heroku using git
